@@ -1,7 +1,8 @@
-#include <QCoreApplication>
+﻿#include <QCoreApplication>
 
 #include "serveri.h"
 #include <QTextCodec>
+
 
 int main(int argc, char *argv[])
 {

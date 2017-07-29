@@ -1,4 +1,4 @@
-#ifndef MAINWINDOW_H
+﻿#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
@@ -13,9 +13,11 @@
 #include <QTime>
 #include <QPushButton>
 #include <QRegExp>
+#include <QFileSystemModel>
 
-namespace Ui {
-class MainWindow;
+namespace Ui
+{
+    class MainWindow;
 }
 
 class MainWindow : public QMainWindow
@@ -29,8 +31,6 @@ public:
 private slots:
     void on_pushButton_clicked();
 
-    void on_lineEdit_editingFinished();
-
     void on_pushButton_2_clicked();
 
     void onSokReadyRead();
@@ -40,9 +40,9 @@ private:
     int count;
     QString Word;
     QString OFile;
-    QTcpSocket *_sok;  //сокет
-    quint16 _blockSize;//текущий размер блока данных
-    QString _name;     //имя клиента
+    QTcpSocket *_socket;
+    quint16 _blockSize;
+    QString _client;
     int sbPort=34998;
 };
 

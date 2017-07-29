@@ -298,6 +298,10 @@ debug\moc_mainwindow.cpp: C:\Qt\5.9.1\msvc2017_64\include\QtWidgets\QMainWindow 
 		C:\Qt\5.9.1\msvc2017_64\include\QtWidgets\qpushbutton.h \
 		C:\Qt\5.9.1\msvc2017_64\include\QtWidgets\qabstractbutton.h \
 		C:\Qt\5.9.1\msvc2017_64\include\QtCore\QRegExp \
+		C:\Qt\5.9.1\msvc2017_64\include\QtWidgets\QFileSystemModel \
+		C:\Qt\5.9.1\msvc2017_64\include\QtWidgets\qfilesystemmodel.h \
+		C:\Qt\5.9.1\msvc2017_64\include\QtCore\qabstractitemmodel.h \
+		C:\Qt\5.9.1\msvc2017_64\include\QtCore\qdiriterator.h \
 		..\Client\mainwindow.h \
 		debug\moc_predefs.h \
 		C:\Qt\5.9.1\msvc2017_64\bin\moc.exe
@@ -452,6 +456,10 @@ debug\main.obj: ..\Client\main.cpp ../Client/mainwindow.h \
 		C:\Qt\5.9.1\msvc2017_64\include\QtWidgets\qpushbutton.h \
 		C:\Qt\5.9.1\msvc2017_64\include\QtWidgets\qabstractbutton.h \
 		C:\Qt\5.9.1\msvc2017_64\include\QtCore\QRegExp \
+		C:\Qt\5.9.1\msvc2017_64\include\QtWidgets\QFileSystemModel \
+		C:\Qt\5.9.1\msvc2017_64\include\QtWidgets\qfilesystemmodel.h \
+		C:\Qt\5.9.1\msvc2017_64\include\QtCore\qabstractitemmodel.h \
+		C:\Qt\5.9.1\msvc2017_64\include\QtCore\qdiriterator.h \
 		C:\Qt\5.9.1\msvc2017_64\include\QtWidgets\QApplication \
 		C:\Qt\5.9.1\msvc2017_64\include\QtWidgets\qapplication.h \
 		C:\Qt\5.9.1\msvc2017_64\include\QtCore\qcoreapplication.h \
@@ -588,6 +596,10 @@ debug\mainwindow.obj: ..\Client\mainwindow.cpp ../Client/mainwindow.h \
 		C:\Qt\5.9.1\msvc2017_64\include\QtWidgets\qpushbutton.h \
 		C:\Qt\5.9.1\msvc2017_64\include\QtWidgets\qabstractbutton.h \
 		C:\Qt\5.9.1\msvc2017_64\include\QtCore\QRegExp \
+		C:\Qt\5.9.1\msvc2017_64\include\QtWidgets\QFileSystemModel \
+		C:\Qt\5.9.1\msvc2017_64\include\QtWidgets\qfilesystemmodel.h \
+		C:\Qt\5.9.1\msvc2017_64\include\QtCore\qabstractitemmodel.h \
+		C:\Qt\5.9.1\msvc2017_64\include\QtCore\qdiriterator.h \
 		ui_mainwindow.h
 
 debug\moc_mainwindow.obj: debug\moc_mainwindow.cpp 
