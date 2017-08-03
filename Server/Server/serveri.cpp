@@ -5,50 +5,47 @@ using namespace std;
 
 Server::Server()
 {
-    server_status=0;
+    serverStatus_=0;
 }
 
 Server::~Server()
 {
-    delete tcpServer;
-    SClients.clear();
+    delete tcpServer_;
+    sClients_.clear();
 }
 
-void Server::Sstart()
+void Server::serverStart()
 {
-    tcpServer = new QTcpServer();
+    tcpServer_ = new QTcpServer();
 
-    connect(tcpServer, SIGNAL(newConnection())
-            , this, SLOT(newuser()));
+    connect(tcpServer_, SIGNAL(newConnection())
+            , this, SLOT(newUser()));
 
-    if (!tcpServer->listen(QHostAddress::Any, 34998)
-            && server_status==0)
-    {
+    if (!tcpServer_->listen(QHostAddress::Any, 34998)
+            && serverStatus_==0) {
         cout<<"Error";
     }
-    else
-    {
-        server_status=1;
+    else {
+        serverStatus_=1;
         cout<<"Server is started\n";
     }
 }
-void Server::newuser()
+void Server::newUser()
 {
-    if(server_status==1)
-    {
+    if (serverStatus_==1) {
             cout<<"You have new connection\n";
 
-            QTcpSocket* clientSocket=tcpServer->nextPendingConnection();
-            int idusersocs=clientSocket->socketDescriptor();
+            QTcpSocket* clientSocket=tcpServer_->nextPendingConnection();
+            int iduserSocs=clientSocket->socketDescriptor();
 
-            SClients[idusersocs]=clientSocket;
-            Flags[idusersocs]=0;
+            sClients_[iduserSocs]=clientSocket;
+            flags_[iduserSocs]=0;
 
             connect(clientSocket, SIGNAL(disconnected()),
                         clientSocket, SLOT(deleteLater())
                        );
-            connect(SClients[idusersocs],SIGNAL(readyRead())
-                    ,this, SLOT(ReadFromClient()));
+            connect(sClients_[iduserSocs],SIGNAL(readyRead())
+                    ,this, SLOT(readFromClient()));
     }
 }
 
@@ -57,58 +54,53 @@ void Server::deleteLater()
     cout<<"Connection was lost\n";
 }
 
-void Server::ReadFromClient()
+void Server::readFromClient()
 {
     QTcpSocket* clientSocket = (QTcpSocket*)sender();
-    int idusersocs=clientSocket->socketDescriptor();
+    int iduserSocs=clientSocket->socketDescriptor();
     QFile file("File"+QDateTime::currentDateTime().toString("hh-mm-ss")+".txt");
 
-    if(!file.open(QIODevice::ReadWrite))
+    if(!file.open(QIODevice::ReadWrite)) {
         cout<<"Error,while open file";
-
+    }
     QTextStream in(clientSocket);
-    char a[1024];
-    while(in.atEnd()!=true)
-    {
-        int nBlockSize=in.device()->read(a,sizeof(a));
-        file.write(a, nBlockSize);
+    char buf[1024];
+    while (in.atEnd()!=true) {
+        int nBlockSize=in.device()->read(buf,sizeof(buf));
+        file.write(buf, nBlockSize);
     }
     QString line;
-    QString word;
     int count=0;
     file.seek(0);
-    while(!file.atEnd())
-    {
+    while (!file.atEnd()) {
         QByteArray line = file.readLine();
         QString str = line.data();
-        if(str.contains('#'))
-        {
+        if (str.contains('#')) {
             QStringList list=str.split('#');
-            Word=list[0];
-            count+=list[1].count(Word);
+            word_=list[0];
+            count+=list[1].count(word_);
             continue;
         }
-        count+=str.count(Word);
-        if(str.contains('~'))
-            Flags[idusersocs]=1;
+        count+=str.count(word_);
+        if (str.contains('~'))
+            flags_[iduserSocs]=1;
     }
     file.remove();
-    SendToClient(clientSocket,count,Flags[idusersocs]);
+    sendToClient(clientSocket,count,flags_[iduserSocs]);
 
 }
 
-void Server::SendToClient(QTcpSocket* pSocket, int count,int flag)
+void Server::sendToClient(QTcpSocket* pSocket, int count,int flag)
 {
     QTextStream out(pSocket);
-    int idusersocs=pSocket->socketDescriptor();
+    int iduserSocs=pSocket->socketDescriptor();
     QString s=QString::number(count);
 
     s+="-1";
     out<<s;
-    if(flag==1)
-    {
+    if (flag==1) {
         pSocket->close();
-        SClients.remove(idusersocs);
-        Flags.remove(idusersocs);
+        sClients_.remove(iduserSocs);
+        flags_.remove(iduserSocs);
     }
 }

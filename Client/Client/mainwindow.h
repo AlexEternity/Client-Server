@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include<QTcpSocket>
+#include <QTcpSocket>
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QFile>
@@ -29,21 +29,21 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();
+    void onFileButtonClicked();
 
-    void on_pushButton_2_clicked();
+    void onSendButtonClicked();
 
     void onSokReadyRead();
 
 private:
-    Ui::MainWindow *ui;
-    int count;
-    QString Word;
-    QString OFile;
-    QTcpSocket *_socket;
-    quint16 _blockSize;
-    QString _client;
-    int sbPort=34998;
+    Ui::MainWindow *ui_;
+    int count_;
+    QString word_;
+    QString oFile_;
+    QTcpSocket *socket_;
+    quint16 blockSize_;
+    QString client_;
+    int SB_PORT=34998;
 };
 
 #endif // MAINWINDOW_H

@@ -15,20 +15,21 @@ class Server:QObject
 public:
     Server();
     ~Server();
-    void Sstart();
+
+    void serverStart();
 
 private slots:
-    void SendToClient(QTcpSocket* pSocket, int count,int flag);
-    void newuser();
-    void ReadFromClient();
+    void sendToClient(QTcpSocket* pSocket, int count,int flag);
+    void newUser();
+    void readFromClient();
     void deleteLater();
 
 private:
-    QString Word;
-    QTcpServer *tcpServer;
-    int server_status;
-    QMap<int,QTcpSocket *> SClients;
-    QMap<int,int> Flags;
+    QString word_;
+    QTcpServer *tcpServer_;
+    int serverStatus_;
+    QMap<int,QTcpSocket *> sClients_;
+    QMap<int,int> flags_;
 };
 
 #endif // SERVERI_H

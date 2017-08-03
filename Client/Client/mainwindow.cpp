@@ -4,51 +4,51 @@
 
 MainWindow::MainWindow(QWidget *parent)
     :QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui_ (new Ui::MainWindow)
 {
-    count=0;
-        _socket = new QTcpSocket(this);
-        connect(_socket, SIGNAL(readyRead()), this, SLOT(onSokReadyRead()));
-    ui->setupUi(this);
+    count_=0;
+    socket_ = new QTcpSocket(this);
+    connect(socket_, SIGNAL(readyRead()), this, SLOT(onSokReadyRead()));
+    ui_->setupUi(this);
 }
 
 MainWindow::~MainWindow()
 {
-    delete _socket;
-    delete ui;
+    delete socket_;
+    delete ui_;
 }
 
 void MainWindow::onSokReadyRead()
 {
     QString message;
-    QTextStream in(_socket);
+    QTextStream in(socket_);
     in>>message;
     QStringList list=message.split("-1");
 
-    for(int i=0;i<list.size();i++)
-        count+=list[i].toInt();
+    for (int i=0; i<list.size(); i++) {
+        count_+=list[i].toInt();
+    }
+    ui_->label_3->setText("Matches: ");
+    ui_->label_2->setText(QString::number(count_));
 
-    ui->label_3->setText("Найдено: ");
-    ui->label_2->setText(QString::number(count));
-
-    ui->pushButton_2->setEnabled(true);
-    ui->pushButton->setEnabled(true);
-    ui->lineEdit->setEnabled(true);
+    ui_->pushButton_2->setEnabled(true);
+    ui_->pushButton->setEnabled(true);
+    ui_->lineEdit->setEnabled(true);
 }
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::onFileButtonClicked()
 {
-    OFile=QFileDialog::getOpenFileName(0,"Open Dialog","",QString("Text Documents(*.txt)"));
+    oFile_=QFileDialog::getOpenFileName(0,"Open Dialog",""
+                                        ,QString("Text Documents(*.txt)"));
 }
 
-void MainWindow::on_pushButton_2_clicked()
+void MainWindow::onSendButtonClicked()
 {
-    QRegExp re;
-    re.setPattern("[A-Zа-яА-Яa-z0-9]+");
-    Word=ui->lineEdit->text();
+    QRegExp regular;
+    regular.setPattern("[A-Zа-яА-Яa-z0-9]+");
+    word_=ui_->lineEdit->text();
 
-    if(Word.isEmpty()||OFile.isEmpty())
-    {
+    if(word_.isEmpty()||oFile_.isEmpty()) {
         QMessageBox* errbx = new QMessageBox("Error"
                                              ,"You didn't add file or word"
                                              ,QMessageBox::Information
@@ -60,8 +60,7 @@ void MainWindow::on_pushButton_2_clicked()
         return;
     }
 
-    if(OFile.isNull()||!OFile.contains(".txt"))
-    {
+    if(oFile_.isNull()||!oFile_.contains(".txt")) {
         QMessageBox* errbx = new QMessageBox("Error"
                                              ,"File not found or not .txt"
                                              ,QMessageBox::Information
@@ -73,8 +72,7 @@ void MainWindow::on_pushButton_2_clicked()
             return;
     }
 
-    if(!re.exactMatch(Word)||Word.contains(" "))
-    {
+    if(!regular.exactMatch(word_)||word_.contains(" ")) {
         QMessageBox* errbx = new QMessageBox("Error"
                                              ,"Write one word(only numbers and letters)"
                                              ,QMessageBox::Information
@@ -86,36 +84,35 @@ void MainWindow::on_pushButton_2_clicked()
         return;
      }
 
-    ui->label_3->setText(" ");
-    ui->label_2->setText(" ");
-    ui->pushButton->setDisabled(true);
-    ui->lineEdit->setDisabled(true);
-    ui->pushButton_2->setDisabled(true);
+    ui_->label_3->setText(" ");
+    ui_->label_2->setText(" ");
+    ui_->pushButton->setDisabled(true);
+    ui_->lineEdit->setDisabled(true);
+    ui_->pushButton_2->setDisabled(true);
 
-    count=0;
+    count_=0;
 
-    _socket->connectToHost("localhost",sbPort);
+    socket_->connectToHost("localhost",SB_PORT);
 
-    QFile file(OFile);
-    if(!file.open(QFile::ReadWrite))
-    {
+    QFile file(oFile_);
+    if(!file.open(QFile::ReadWrite)) {
         QMessageBox* errbx = new QMessageBox("Error"
                                              ,"Can not open file"
                                              ,QMessageBox::Information
                                              ,QMessageBox::Yes
                                              ,NULL
                                              ,NULL);
-        ui->pushButton_2->setEnabled(true);
-        ui->pushButton->setEnabled(true);
-        ui->lineEdit->setEnabled(true);
+        ui_->pushButton_2->setEnabled(true);
+        ui_->pushButton->setEnabled(true);
+        ui_->lineEdit->setEnabled(true);
         errbx->exec();
         delete errbx;
         return;
      }
      QTextStream f(&file);
-     QTextStream out(_socket);
+     QTextStream out(socket_);
 
-     out<<Word;
+     out<<word_;
      out<<"#";
      out<<QString(file.readAll());
      out<<"~";

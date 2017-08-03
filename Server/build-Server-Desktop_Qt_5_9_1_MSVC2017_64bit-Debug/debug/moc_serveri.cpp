@@ -32,19 +32,19 @@ struct qt_meta_stringdata_Server_t {
 static const qt_meta_stringdata_Server_t qt_meta_stringdata_Server = {
     {
 QT_MOC_LITERAL(0, 0, 6), // "Server"
-QT_MOC_LITERAL(1, 7, 12), // "SendToClient"
+QT_MOC_LITERAL(1, 7, 12), // "sendToClient"
 QT_MOC_LITERAL(2, 20, 0), // ""
 QT_MOC_LITERAL(3, 21, 11), // "QTcpSocket*"
 QT_MOC_LITERAL(4, 33, 7), // "pSocket"
 QT_MOC_LITERAL(5, 41, 5), // "count"
 QT_MOC_LITERAL(6, 47, 4), // "flag"
-QT_MOC_LITERAL(7, 52, 7), // "newuser"
-QT_MOC_LITERAL(8, 60, 14), // "ReadFromClient"
+QT_MOC_LITERAL(7, 52, 7), // "newUser"
+QT_MOC_LITERAL(8, 60, 14), // "readFromClient"
 QT_MOC_LITERAL(9, 75, 11) // "deleteLater"
 
     },
-    "Server\0SendToClient\0\0QTcpSocket*\0"
-    "pSocket\0count\0flag\0newuser\0ReadFromClient\0"
+    "Server\0sendToClient\0\0QTcpSocket*\0"
+    "pSocket\0count\0flag\0newUser\0readFromClient\0"
     "deleteLater"
 };
 #undef QT_MOC_LITERAL
@@ -83,9 +83,9 @@ void Server::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         Server *_t = static_cast<Server *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->SendToClient((*reinterpret_cast< QTcpSocket*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
-        case 1: _t->newuser(); break;
-        case 2: _t->ReadFromClient(); break;
+        case 0: _t->sendToClient((*reinterpret_cast< QTcpSocket*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
+        case 1: _t->newUser(); break;
+        case 2: _t->readFromClient(); break;
         case 3: _t->deleteLater(); break;
         default: ;
         }

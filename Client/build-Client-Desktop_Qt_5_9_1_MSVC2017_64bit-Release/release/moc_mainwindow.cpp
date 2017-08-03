@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
     QByteArrayData data[5];
-    char stringdata0[73];
+    char stringdata0[67];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,14 +32,14 @@ struct qt_meta_stringdata_MainWindow_t {
 static const qt_meta_stringdata_MainWindow_t qt_meta_stringdata_MainWindow = {
     {
 QT_MOC_LITERAL(0, 0, 10), // "MainWindow"
-QT_MOC_LITERAL(1, 11, 21), // "on_pushButton_clicked"
-QT_MOC_LITERAL(2, 33, 0), // ""
-QT_MOC_LITERAL(3, 34, 23), // "on_pushButton_2_clicked"
-QT_MOC_LITERAL(4, 58, 14) // "onSokReadyRead"
+QT_MOC_LITERAL(1, 11, 19), // "onFileButtonClicked"
+QT_MOC_LITERAL(2, 31, 0), // ""
+QT_MOC_LITERAL(3, 32, 19), // "onSendButtonClicked"
+QT_MOC_LITERAL(4, 52, 14) // "onSokReadyRead"
 
     },
-    "MainWindow\0on_pushButton_clicked\0\0"
-    "on_pushButton_2_clicked\0onSokReadyRead"
+    "MainWindow\0onFileButtonClicked\0\0"
+    "onSendButtonClicked\0onSokReadyRead"
 };
 #undef QT_MOC_LITERAL
 
@@ -75,8 +75,8 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         MainWindow *_t = static_cast<MainWindow *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->on_pushButton_clicked(); break;
-        case 1: _t->on_pushButton_2_clicked(); break;
+        case 0: _t->onFileButtonClicked(); break;
+        case 1: _t->onSendButtonClicked(); break;
         case 2: _t->onSokReadyRead(); break;
         default: ;
         }
